@@ -1,49 +1,66 @@
 package services;
 
 import disc.Disc;
+
 import java.io.IOException;
 import java.util.List;
 import java.util.Scanner;
+
 import song.Song;
 
 public class Menu {
     /*Menu interface creation class*/
     Disc disc = new Disc();
-    DiscTools discTools;
+    DiscTools discTools = new DiscTools(disc, "src/main/resources/songsList.txt");
 
-    public Menu() throws IOException {
-        this.discTools = new DiscTools(disc, "src/main/resources/songsList.txt");
-        this.printMenu();
-        this.initDisc(discTools);
+    public Menu() {
     }
 
     public void printMenu() throws IOException {
+        initDisc(discTools);
         /*Menu interface*/
-        Boolean f = true;
-        System.out.println("Welcome in my studio!\n" +
-                "Here you can:\n" +
-                "Record songs on cd - 1\n" +
-                "Calculate general songs duration - 2\n" +
-                "Sort contains on disc - 3\n" +
-                "Find composition on your disc - 4\n" +
-                "Remove composition from disc - 5\n" +
-                "Look at disc contains - 6\n" +
-                "Fill disc with existing compositions - 7\n" +
-                "Exit from program - 0\n");
+        System.out.println(new StringBuilder()
+                .append("Welcome in my studio!\n")
+                .append("Here you can:\n")
+                .append("Record songs on cd - 1\n")
+                .append("Calculate general songs duration - 2\n")
+                .append("Sort contains on disc - 3\n")
+                .append("Find composition on your disc - 4\n")
+                .append("Remove composition from disc - 5\n")
+                .append("Look at disc contains - 6\n")
+                .append("Fill disc with existing compositions - 7\n")
+                .append("Exit from program - 0\n")
+                .toString());
 
-        for(; f; System.out.println()) {
+        Boolean runProgram = true;
+        for (; runProgram; System.out.println()) {
             Scanner scanner = new Scanner(System.in);
             System.out.print("So what is your choice: ");
             Integer userChoice = scanner.nextInt();
-            switch(userChoice) {
-                case 0: f = false; break;
-                case 1: addSongOnDisc(discTools); break;
-                case 2: getFullDuration(discTools); break;
-                case 3: sortContainsOnDisc(discTools); break;
-                case 4: findCompositionOnDisc(discTools); break;
-                case 5: removeCompositionFromDisc(discTools); break;
-                case 6: showDiscContains(discTools); break;
-                case 7: initDisc(discTools);
+            switch (userChoice) {
+                case 0:
+                    runProgram = false;
+                    break;
+                case 1:
+                    addSongOnDisc(discTools);
+                    break;
+                case 2:
+                    getFullDuration(discTools);
+                    break;
+                case 3:
+                    sortContainsOnDisc(discTools);
+                    break;
+                case 4:
+                    findCompositionOnDisc(discTools);
+                    break;
+                case 5:
+                    removeCompositionFromDisc(discTools);
+                    break;
+                case 6:
+                    showDiscContains(discTools);
+                    break;
+                case 7:
+                    initDisc(discTools);
             }
         }
 
@@ -66,7 +83,7 @@ public class Menu {
         /*Sorts disc contains recording to users sorting option*/
         Scanner scanner = new Scanner(System.in);
         System.out.println("Sort contains by name, author, duration or genre? :");
-        FileFunctions fileFunctions = FileFunctions.getInstance();
+        FileServices fileFunctions = new FileServices();
         List<Song> sortedSongs = discTools.sortSongs(scanner.next());
         fileFunctions.writeInFile(discTools.getFilePath(), sortedSongs);
         discTools.printSongs(sortedSongs);

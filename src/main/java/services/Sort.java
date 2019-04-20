@@ -12,22 +12,30 @@ public class Sort {
     }
 
     public static List<Song> sortByName(Disc disc) {
-        return disc.getSongs().stream().sorted(Comparator
-                .comparing(Song::getName)).collect(Collectors.toList());
+        return disc.getSongs().stream()
+                .sorted(Comparator
+                .comparing(Song::getName))
+                .collect(Collectors.toList());
     }
 
     public static List<Song> sortByAuthor(Disc disc) {
-        return disc.getSongs().stream().sorted(Comparator
-                .comparing(Song::getAuthor)).collect(Collectors.toList());
+        return disc.getSongs().stream()
+                .sorted(Comparator
+                .comparing(Song::getAuthor))
+                .collect(Collectors.toList());
     }
 
     public static List<Song> sortByDuration(Disc disc) {
-        return disc.getSongs().stream().sorted(Comparator
-                .comparing(Song::getDuration)).collect(Collectors.toList());
+        return disc.getSongs().stream()
+                .sorted(Comparator
+                .comparing(Song::getDuration))
+                .collect(Collectors.toList());
     }
 
     public static List<Song> sortByGenre(Disc disc) {
-        return disc.getSongs().stream().sorted(Comparator
-                .comparing(Song::getGenre)).collect(Collectors.toList());
+        return disc.getSongs().stream()
+                .sorted(Comparator
+                .comparing(Song::getGenre))
+                .collect(Collectors.toList());
     }
 }

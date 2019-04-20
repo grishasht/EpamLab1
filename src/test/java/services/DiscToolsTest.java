@@ -8,8 +8,8 @@ import org.junit.Test;
 import song.Song;
 
 public class DiscToolsTest {
-    private FileFunctions fileFunctions = new FileFunctions();
-    private CreateIerarchi ierarchi = new CreateIerarchi();
+    private FileServices fileFunctions = new FileServices();
+    private HierarchyCreator ierarchi = new HierarchyCreator();
     private Disc disc = new Disc();
 
     public Song resultSong(String name, String author, Float duration, String genre, String filePath) throws IOException {

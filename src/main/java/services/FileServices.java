@@ -7,28 +7,18 @@ import java.io.FileReader;
 import java.io.FileWriter;
 import java.io.IOException;
 import java.io.PrintWriter;
-import java.util.Iterator;
 import java.util.List;
 import song.Song;
 
-public class FileFunctions {
+public class FileServices {
     public BufferedReader buffReader;
-
-    public static FileFunctions getInstance() {
-        return FileFunctions.SingletonHolder.INSTANCE;
-    }
-
-    private static class SingletonHolder {
-        private static final FileFunctions INSTANCE = new FileFunctions();
-        private SingletonHolder() {
-        }
-    }
 
     public void openFile (String filePath) throws IOException {
         buffReader = new BufferedReader(new FileReader(filePath));
     }
 
-    public String readFromFile () throws IOException {
+    public String readFromFile (String filePath) throws IOException {
+        if (!buffReader.ready()) openFile(filePath);
         String buff = this.buffReader.readLine();
         return buff != null ? buff : "";
     }

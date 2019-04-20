@@ -2,21 +2,20 @@ package services;
 
 import java.io.IOException;
 import java.rmi.NoSuchObjectException;
-import java.util.Iterator;
 import java.util.LinkedList;
 import java.util.List;
 import song.Song;
 
-public class CreateIerarchi {
-    private FileFunctions fileFunctions = FileFunctions.getInstance();
+public class HierarchyCreator {
+    private FileServices fileFunctions = new FileServices();
     private List<Song> songs = new LinkedList();
 
     public List<Song> getSongs() {
         return this.songs;
     }
 
+    /*Parses gotten string and returns gotten song*/
     private Song getSong(String song) throws IOException {
-        /*Parses gotten string and returns gotten song*/
         Song songInit = new Song();
         String buff = "";
         int k = 0;
@@ -38,13 +37,13 @@ public class CreateIerarchi {
         return songInit;
     }
 
+    /*Reads songs from file and pushes it into songs list*/
     public List<Song> getSongsList(String filePath) throws IOException {
-        /*Reads songs from file and pushes it into songs list*/
         fileFunctions.openFile(filePath);
         songs.clear();
 
         String song;
-        while((song = this.fileFunctions.readFromFile()) != "") {
+        while((song = this.fileFunctions.readFromFile(filePath)) != "") {
             songs.add(this.getSong(song));
         }
 
@@ -52,18 +51,9 @@ public class CreateIerarchi {
         return songs;
     }
 
+    /*Adds new song to songs list*/
     public List<Song> addSongToIerarchy(String name, String author, Float duration, String genre) {
-        /*Adds new song to songs list*/
         songs.add(new Song(name, author, duration, genre));
-        return songs;
-    }
-
-    public List<Song> printSongsList(String filePath) throws IOException {
-        getSongsList(filePath);
-        for(Song song: songs) {
-            System.out.println(song.getName() + " " + song.getAuthor()
-                    + " " + song.getDuration() + " " + song.getGenre());
-        }
         return songs;
     }
 

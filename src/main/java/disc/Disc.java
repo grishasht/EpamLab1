@@ -14,10 +14,6 @@ public class Disc {
         this.songs = songs;
     }
 
-    public void removeFromDisc(String songName) {
-        this.songs.removeIf((song) -> song.getName().equals(songName));
-    }
-
     public List<Song> getSongs() {
         return this.songs;
     }
