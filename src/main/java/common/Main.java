@@ -5,6 +5,7 @@ import services.Menu;
 
 public class Main {
     public static void main(String[] args) throws IOException {
-        new Menu();
+        Menu menu = new Menu();
+        menu.printMenu();
     }
 }

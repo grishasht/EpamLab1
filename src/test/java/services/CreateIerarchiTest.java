@@ -13,7 +13,7 @@ import org.junit.Test;
 import song.Song;
 
 public class CreateIerarchiTest {
-    CreateIerarchi ierarchi = new CreateIerarchi();
+    HierarchyCreator ierarchi = new HierarchyCreator();
 
     @Test
     public void getSongsListShouldReturnCorrectList() throws IOException {
