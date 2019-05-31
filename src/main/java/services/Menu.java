@@ -1,7 +1,6 @@
 package services;
 
 import disc.Disc;
-
 import java.io.IOException;
 import java.util.List;
 import java.util.Scanner;
@@ -9,8 +8,8 @@ import services.FileServices;
 
 import song.Song;
 
-/*Menu interface creation class*/
 public class Menu {
+    /*Menu interface creation class*/
     Disc disc = new Disc();
     DiscTools discTools;
 
@@ -62,21 +61,21 @@ public class Menu {
 
     }
 
-    /*Records users song on disc*/
     private void addSongOnDisc(DiscTools discTools) throws IOException {
+        /*Records users song on disc*/
         Scanner scanner = new Scanner(System.in);
         System.out.println("Write: <Name> <Author> <Duration> <Genre>");
         discTools.addSongOnDisc(scanner.next(), scanner.next(), scanner.nextFloat(), scanner.next());
         System.out.println("Successfully added");
     }
 
-    /*Prints general songs duration*/
     private void getFullDuration(DiscTools discTools) {
+        /*Prints general songs duration*/
         System.out.println("Full songs duration is: " + discTools.getFullDuration());
     }
 
-    /*Sorts disc contains recording to users sorting option*/
     private void sortContainsOnDisc(DiscTools discTools) throws IOException {
+        /*Sorts disc contains recording to users sorting option*/
         Scanner scanner = new Scanner(System.in);
         System.out.println("Sort contains by name, author, duration or genre? :");
         FileFunctions fileFunctions = FileFunctions.getInstance();
@@ -86,8 +85,8 @@ public class Menu {
         System.out.println("Successfully sorted! Init the disc");
     }
 
-    /*Finds composition from entered by user range*/
     private void findCompositionOnDisc(DiscTools discTools) throws IOException {
+        /*Finds composition from entered by user range*/
         Scanner scanner = new Scanner(System.in);
         System.out.println("Write duration of your song: <from> <to>");
         List<Song> result = discTools.songsByDuration(scanner.nextInt(), scanner.nextInt());
@@ -105,8 +104,8 @@ public class Menu {
         discTools.printSongs(this.disc.getSongs());
     }
 
-    /*Writes information from file on disc*/
     private void initDisc(DiscTools discTools) throws IOException {
+        /*Writes information from file on disc*/
         discTools.writeSongsOnDisc();
         System.out.println("Successfully inited!");
     }
